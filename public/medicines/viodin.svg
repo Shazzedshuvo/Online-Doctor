@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+    <linearGradient id="bottle" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4e342e"/>
+      <stop offset="50%" stop-color="#8d6e63"/>
+      <stop offset="100%" stop-color="#4e342e"/>
+    </linearGradient>
+    <linearGradient id="cap" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="3" dy="8" stdDeviation="6" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#bg)" rx="16"/>
+
+  <!-- Bottle Group with Shadow -->
+  <g filter="url(#shadow)" transform="translate(140, 25)">
+    <!-- Cap -->
+    <rect x="35" y="10" width="50" height="24" rx="4" fill="url(#cap)" stroke="#94a3b8" stroke-width="1.5"/>
+    <line x1="42" y1="14" x2="42" y2="30" stroke="#94a3b8" stroke-width="1.5"/>
+    <line x1="50" y1="14" x2="50" y2="30" stroke="#94a3b8" stroke-width="1.5"/>
+    <line x1="60" y1="14" x2="60" y2="30" stroke="#94a3b8" stroke-width="1.5"/>
+    <line x1="70" y1="14" x2="70" y2="30" stroke="#94a3b8" stroke-width="1.5"/>
+    <line x1="78" y1="14" x2="78" y2="30" stroke="#94a3b8" stroke-width="1.5"/>
+
+    <!-- Neck -->
+    <rect x="42" y="34" width="36" height="18" fill="url(#bottle)"/>
+
+    <!-- Body -->
+    <path d="M 20 65 C 20 52 42 52 42 52 L 78 52 C 78 52 100 52 100 65 L 108 215 C 108 228 98 235 85 235 L 35 235 C 22 235 12 228 12 215 Z" fill="url(#bottle)"/>
+
+    <!-- Label -->
+    <rect x="18" y="90" width="84" height="110" rx="4" fill="#ffffff" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.1))"/>
+    <rect x="18" y="90" width="84" height="12" fill="#4e342e"/>
+    <text x="60" y="125" font-family="Arial, sans-serif" font-size="14" font-weight="900" fill="#4e342e" text-anchor="middle">Viodin 10%</text>
+    <text x="60" y="142" font-family="Arial, sans-serif" font-size="8" font-weight="bold" fill="#64748b" text-anchor="middle">Povidone</text>
+    <text x="60" y="160" font-family="Arial, sans-serif" font-size="7" fill="#0284c7" text-anchor="middle">SUSPENSION</text>
+    <rect x="30" y="172" width="60" height="16" rx="3" fill="#8d6e63" opacity="0.2"/>
+    <text x="60" y="183" font-family="Arial, sans-serif" font-size="8" font-weight="bold" fill="#4e342e" text-anchor="middle">Square Pharma</text>
+  </g>
+
+  <!-- Product badge -->
+  <g transform="translate(20, 20)">
+    <rect width="90" height="24" rx="12" fill="#ffffff" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.06))"/>
+    <circle cx="14" cy="12" r="5" fill="#8d6e63"/>
+    <text x="26" y="16" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#334155">Gargle / Solution</text>
+  </g>
+</svg>
