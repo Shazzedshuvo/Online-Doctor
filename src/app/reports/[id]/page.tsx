@@ -135,22 +135,22 @@ export default function ReportDetailPage() {
   }
 
   return (
-    <div className="flex-1 bg-slate-100 py-6 sm:py-10 px-4">
+    <div className="flex-1 overflow-y-auto bg-slate-100 py-4 sm:py-10 px-2.5 sm:px-4">
       {/* Top Floating Action Bar (Hidden during Print) */}
-      <div className="max-w-4xl mx-auto mb-6 flex items-center justify-between no-print">
+      <div className="max-w-4xl mx-auto mb-4 sm:mb-6 flex flex-wrap items-center justify-between gap-2 no-print">
         <Link
           href="/reports"
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-slate-900 bg-white px-3 py-2 rounded-xl border border-slate-200 shadow-xs"
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 bg-white px-3 py-2 rounded-xl border border-slate-200 shadow-2xs active:scale-95"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>{t.reports.backToChat}</span>
         </Link>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           {user?.role === 'admin' && !report.clinicianVerification?.isPrescriptionApproved && (
             <button
               onClick={() => setIsClinicianModalOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer active:scale-95"
             >
               <Stethoscope className="w-4 h-4" />
               <span>চিকিৎসক অনুমোদন যুক্ত করুন</span>
@@ -159,7 +159,7 @@ export default function ReportDetailPage() {
 
           <button
             onClick={handlePrint}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-xl text-xs font-bold shadow-md cursor-pointer transition"
+            className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-xl text-xs font-bold shadow-md cursor-pointer transition active:scale-95"
           >
             <Printer className="w-4 h-4" />
             <span>{t.reports.printBtn}</span>
@@ -168,19 +168,19 @@ export default function ReportDetailPage() {
       </div>
 
       {/* A4 PRINTABLE DOCUMENT CONTAINER */}
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl p-8 sm:p-12 shadow-xl border border-slate-200 printable-document font-sans text-slate-900 space-y-6">
+      <div className="max-w-4xl mx-auto bg-white rounded-2xl p-4 sm:p-8 md:p-12 shadow-xl border border-slate-200 printable-document font-sans text-slate-900 space-y-5 sm:space-y-6">
         {/* Document Header */}
-        <div className="border-b-2 border-teal-700 pb-5 flex items-start justify-between">
+        <div className="border-b-2 border-teal-700 pb-4 sm:pb-5 flex flex-col sm:flex-row sm:items-start justify-between gap-3">
           <div className="space-y-1">
-            <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl overflow-hidden flex items-center justify-center shadow-xs">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl overflow-hidden flex items-center justify-center shadow-xs shrink-0">
                 <img src="/icon.svg" alt="Online Doctor" className="w-full h-full object-contain" />
               </div>
               <span className="text-xl sm:text-2xl font-black tracking-tight text-slate-900">
                 Online<span className="text-teal-600">Doctor</span>
               </span>
             </div>
-            <p className="text-xs text-slate-500 font-medium">
+            <p className="text-xs text-slate-600 font-medium">
               ডিজিটাল স্বাস্থ্য পরামর্শ সারসংক্ষেপ (Digital Health Consultation Summary)
             </p>
             <p className="text-[11px] text-slate-400">
@@ -188,7 +188,7 @@ export default function ReportDetailPage() {
             </p>
           </div>
 
-          <div className="text-right space-y-1">
+          <div className="sm:text-right space-y-1 bg-teal-50/50 sm:bg-transparent p-2.5 sm:p-0 rounded-xl">
             <span className="inline-block px-2.5 py-1 rounded bg-teal-50 border border-teal-200 text-teal-900 text-xs font-mono font-bold">
               {report.reportId}
             </span>
@@ -199,12 +199,12 @@ export default function ReportDetailPage() {
         </div>
 
         {/* Mandatory Prominent Legal Header Notice */}
-        <div className="p-3 bg-amber-50 border border-amber-300 rounded-xl text-amber-950 text-center font-bold text-xs sm:text-sm">
+        <div className="p-3 bg-amber-50 border border-amber-300 rounded-xl text-amber-950 text-center font-bold text-xs sm:text-sm leading-relaxed">
           “{t.reportNotice}”
         </div>
 
         {/* Patient Demographics Box */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 bg-slate-50 p-3.5 sm:p-4 rounded-xl border border-slate-200 text-xs">
           <div>
             <span className="text-slate-400 block text-[10px] uppercase font-semibold">
               {t.reports.patientName}

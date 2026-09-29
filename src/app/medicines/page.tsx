@@ -107,7 +107,7 @@ export default function MedicineDirectoryPage() {
           </div>
 
           {/* Search and Filters Bar */}
-          <div className="mt-5 sm:mt-6 flex flex-col sm:flex-row gap-3">
+          <div className="mt-5 sm:mt-6 flex flex-col sm:flex-row gap-2.5 sm:gap-3">
             <div className="relative flex-1 min-w-0">
               <Search className="w-4 h-4 absolute left-3.5 top-3.5 text-slate-400" />
               <input
@@ -124,11 +124,11 @@ export default function MedicineDirectoryPage() {
               />
             </div>
 
-            <div className="flex gap-2 sm:gap-3">
+            <div className="grid grid-cols-2 sm:flex gap-2 sm:gap-3">
               <select
                 value={selectedForm}
                 onChange={(e) => setSelectedForm(e.target.value)}
-                className="flex-1 sm:w-40 px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 text-slate-700 cursor-pointer"
+                className="w-full sm:w-40 px-2.5 sm:px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 text-slate-700 cursor-pointer truncate"
               >
                 <option value="all">{t.medicines.allForms}</option>
                 {filterOptions.dosageForms.map((f) => (
@@ -141,7 +141,7 @@ export default function MedicineDirectoryPage() {
               <select
                 value={selectedManufacturer}
                 onChange={(e) => setSelectedManufacturer(e.target.value)}
-                className="flex-1 sm:w-44 px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 text-slate-700 cursor-pointer"
+                className="w-full sm:w-44 px-2.5 sm:px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 text-slate-700 cursor-pointer truncate"
               >
                 <option value="all">{t.medicines.allManufacturers}</option>
                 {filterOptions.manufacturers.map((m) => (
@@ -258,40 +258,41 @@ export default function MedicineDirectoryPage() {
       {/* Full Medicine Details Modal */}
       {selectedMedicine && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/50 backdrop-blur-xs overflow-y-auto"
+          className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto"
           onClick={() => setSelectedMedicine(null)}
         >
           <div
-            className="bg-white rounded-2xl max-w-2xl w-full p-5 sm:p-7 space-y-5 max-h-[92vh] overflow-y-auto shadow-2xl border border-slate-200 relative my-auto"
+            className="bg-white rounded-2xl max-w-2xl w-full p-4 sm:p-7 space-y-4 sm:space-y-5 max-h-[90dvh] overflow-y-auto shadow-2xl border border-slate-200 relative my-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="flex items-start justify-between pb-4 border-b border-slate-100">
-              <div>
-                <div className="flex items-center gap-2">
-                  <h3 className="text-xl sm:text-2xl font-black text-slate-900">
+            <div className="flex items-start justify-between gap-2 pb-3 sm:pb-4 border-b border-slate-100">
+              <div className="space-y-1 min-w-0">
+                <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                  <h3 className="text-lg sm:text-2xl font-black text-slate-900 leading-tight">
                     {selectedMedicine.brandName}
                   </h3>
-                  <span className="text-xs font-bold px-2 py-0.5 rounded bg-teal-100 text-teal-800">
+                  <span className="text-[11px] sm:text-xs font-bold px-2 py-0.5 rounded bg-teal-100 text-teal-800">
                     {selectedMedicine.strength}
                   </span>
                   {selectedMedicine.priceBdt && (
-                    <span className="text-xs font-extrabold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">
+                    <span className="text-[11px] sm:text-xs font-extrabold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">
                       ৳{selectedMedicine.priceBdt.toFixed(2)} / পিস
                     </span>
                   )}
                 </div>
-                <p className="text-sm font-bold text-teal-700 mt-1">
+                <p className="text-xs sm:text-sm font-bold text-teal-700">
                   {selectedMedicine.genericName}
                 </p>
-                <p className="text-xs text-slate-500 mt-0.5">
+                <p className="text-[11px] sm:text-xs text-slate-500">
                   {selectedMedicine.manufacturer} • {selectedMedicine.dosageForm}
                 </p>
               </div>
 
               <button
                 onClick={() => setSelectedMedicine(null)}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 cursor-pointer"
+                className="p-1.5 sm:p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 cursor-pointer shrink-0 active:scale-95"
+                aria-label="Close modal"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -299,7 +300,7 @@ export default function MedicineDirectoryPage() {
 
             {/* Large Visual Packaging Image Preview */}
             {selectedMedicine.imageUrl && (
-              <div className="w-full h-52 sm:h-60 bg-gradient-to-b from-slate-50 to-slate-100 rounded-2xl p-4 flex items-center justify-center border border-slate-200/80 shadow-inner">
+              <div className="w-full h-44 sm:h-60 bg-gradient-to-b from-slate-50 to-slate-100 rounded-2xl p-3 sm:p-4 flex items-center justify-center border border-slate-200/80 shadow-inner">
                 <img
                   src={selectedMedicine.imageUrl}
                   alt={selectedMedicine.brandName}

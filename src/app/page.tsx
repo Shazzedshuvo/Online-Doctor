@@ -373,26 +373,26 @@ export default function ChatDashboardPage() {
   };
 
   return (
-    <div className="flex-1 flex overflow-hidden w-full">
+    <div className="flex-1 flex overflow-hidden w-full h-[calc(100dvh-4.75rem)] sm:h-[calc(100dvh-5.5rem)] min-h-0">
       {/* 1. LEFT SIDEBAR: Conversation History (Desktop & Mobile Drawer) */}
       <aside
-        className={`fixed top-0 left-0 bottom-0 z-40 w-[280px] sm:w-72 bg-white border-r border-slate-200/80 flex flex-col transition-transform duration-300 ease-in-out md:sticky md:top-0 md:self-start md:h-full md:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 w-[84vw] max-w-[300px] sm:w-72 bg-white border-r border-slate-200/80 flex flex-col transition-transform duration-300 ease-in-out md:static md:w-72 md:h-full md:translate-x-0 ${
           isSidebarOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'
         }`}
-        style={{ paddingTop: isSidebarOpen ? 0 : undefined }}
       >
         {/* Sidebar Header */}
-        <div className="p-3.5 border-b border-slate-100 flex items-center justify-between gap-2">
+        <div className="p-3 sm:p-3.5 border-b border-slate-100 flex items-center justify-between gap-2">
           <button
             onClick={handleStartNewChat}
-            className="flex-1 flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs transition shadow-sm cursor-pointer"
+            className="flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs transition shadow-sm cursor-pointer active:scale-95"
           >
             <Plus className="w-4 h-4" />
             <span>{t.chat.newChat}</span>
           </button>
           <button
             onClick={() => setIsSidebarOpen(false)}
-            className="md:hidden p-2 rounded-lg text-slate-400 hover:bg-slate-100"
+            className="md:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 cursor-pointer"
+            aria-label="Close chat history"
           >
             <X className="w-5 h-5" />
           </button>
@@ -524,7 +524,7 @@ export default function ChatDashboardPage() {
       {isSidebarOpen && (
         <div
           onClick={() => setIsSidebarOpen(false)}
-          className="fixed inset-0 bg-slate-900/50 z-30 md:hidden backdrop-blur-sm"
+          className="fixed inset-0 bg-slate-900/60 z-40 md:hidden backdrop-blur-xs transition-opacity"
           aria-label="Close sidebar"
         />
       )}
@@ -532,19 +532,20 @@ export default function ChatDashboardPage() {
       {/* 2. CENTRAL CHAT AREA */}
       <section className="flex-1 flex flex-col bg-white overflow-hidden min-w-0">
         {/* Chat Header Bar */}
-        <div className="h-14 px-4 border-b border-slate-200/70 flex items-center justify-between bg-white/80 backdrop-blur-xs">
-          <div className="flex items-center gap-2">
+        <div className="h-13 sm:h-14 px-2.5 sm:px-4 border-b border-slate-200/80 flex items-center justify-between bg-white/95 backdrop-blur-xs shrink-0">
+          <div className="flex items-center gap-2 min-w-0">
             <button
               onClick={() => setIsSidebarOpen(true)}
-              className="md:hidden p-1.5 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50"
+              className="md:hidden p-2 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50 active:bg-slate-100 cursor-pointer"
               title="চ্যাট হিস্ট্রি"
+              aria-label="Open chat history"
             >
               <MessageSquare className="w-4 h-4" />
             </button>
 
-            <div className="flex items-center gap-2">
-              <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
-              <h1 className="text-sm sm:text-base font-bold text-slate-800 truncate max-w-[200px] sm:max-w-md">
+            <div className="flex items-center gap-2 min-w-0">
+              <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></div>
+              <h1 className="text-xs sm:text-base font-bold text-slate-900 truncate max-w-[140px] xs:max-w-[200px] sm:max-w-md">
                 {activeConversationId
                   ? conversations.find((c) => c.id === activeConversationId)?.title ||
                     t.appName
@@ -553,15 +554,16 @@ export default function ChatDashboardPage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             {/* Generate Report Button for this consultation */}
             {messages.length > 1 && (
               <Link
                 href={`/reports?generateFrom=${activeConversationId || 'current'}`}
-                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-teal-50 border border-teal-200 text-teal-800 text-xs font-semibold hover:bg-teal-100 transition shadow-xs"
+                className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 py-1.5 rounded-lg bg-teal-50 border border-teal-200 text-teal-800 text-xs font-semibold hover:bg-teal-100 active:bg-teal-200 transition shadow-2xs"
+                title={t.chat.generateReportBtn}
               >
-                <FileText className="w-3.5 h-3.5 text-teal-600" />
-                <span>{t.chat.generateReportBtn}</span>
+                <FileText className="w-3.5 h-3.5 text-teal-600 shrink-0" />
+                <span className="hidden xs:inline">{t.chat.generateReportBtn}</span>
               </Link>
             )}
 
@@ -605,24 +607,24 @@ export default function ChatDashboardPage() {
               </div>
 
               {/* Bangladesh Medical Safety Notice Banner */}
-              <div className="p-3.5 bg-teal-50/80 rounded-xl border border-teal-200/70 text-teal-900 text-xs max-w-lg mx-auto text-left flex gap-3 shadow-xs">
-                <Info className="w-5 h-5 text-teal-700 shrink-0 mt-0.5" />
-                <p className="leading-relaxed font-medium">
+              <div className="p-3 sm:p-3.5 bg-teal-50/80 rounded-xl border border-teal-200/70 text-teal-900 text-xs max-w-lg mx-auto text-left flex gap-2.5 shadow-2xs">
+                <Info className="w-4 h-4 text-teal-700 shrink-0 mt-0.5" />
+                <p className="leading-relaxed font-medium text-[11px] sm:text-xs">
                   {t.disclaimerText}
                 </p>
               </div>
 
               {/* Quick Symptom Chips */}
-              <div className="space-y-3 pt-2">
-                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+              <div className="space-y-2.5 pt-1">
+                <p className="text-[11px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider">
                   {t.chat.symptomSuggestionsTitle}
                 </p>
-                <div className="flex flex-wrap justify-center gap-2">
+                <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2">
                   {t.chat.chips.map((chip, idx) => (
                     <button
                       key={idx}
                       onClick={() => handleSendMessage(chip)}
-                      className="px-3 sm:px-3.5 py-2 rounded-xl bg-white border border-slate-200 hover:border-teal-400 hover:bg-teal-50/50 text-slate-700 hover:text-teal-900 text-xs font-medium transition cursor-pointer shadow-xs hover:shadow-sm active:scale-95"
+                      className="px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl bg-white border border-slate-200 hover:border-teal-400 hover:bg-teal-50/50 text-slate-700 hover:text-teal-900 text-[11px] sm:text-xs font-medium transition cursor-pointer shadow-2xs hover:shadow-xs active:scale-95"
                     >
                       {chip}
                     </button>
@@ -779,9 +781,9 @@ export default function ChatDashboardPage() {
         )}
 
         {/* Chat Composer Bar */}
-        <div className="p-2 sm:p-3 md:p-4 border-t border-slate-200/80 bg-white shadow-lg safe-bottom">
-          <div className="max-w-4xl mx-auto space-y-1.5">
-            <div className="relative flex items-end gap-2 bg-slate-50 border border-slate-300 rounded-xl sm:rounded-2xl p-1.5 sm:p-2 focus-within:ring-2 focus-within:ring-teal-500 focus-within:border-teal-500 focus-within:bg-white transition">
+        <div className="p-2 sm:p-3 border-t border-slate-200/80 bg-white shadow-lg safe-bottom shrink-0">
+          <div className="max-w-4xl mx-auto space-y-1 sm:space-y-1.5">
+            <div className="relative flex items-end gap-1.5 sm:gap-2 bg-slate-50 border border-slate-300 rounded-xl sm:rounded-2xl p-1.5 sm:p-2 focus-within:ring-2 focus-within:ring-teal-500 focus-within:border-teal-500 focus-within:bg-white transition">
               <textarea
                 ref={textareaRef}
                 value={inputMessage}
@@ -789,25 +791,26 @@ export default function ChatDashboardPage() {
                 onKeyDown={handleKeyDown}
                 rows={1}
                 placeholder={t.chat.placeholder}
-                className="w-full bg-transparent px-2 py-1.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none resize-none max-h-28 sm:max-h-32 min-h-[40px]"
+                className="w-full bg-transparent px-2 py-1 text-sm text-slate-800 placeholder-slate-400 focus:outline-none resize-none max-h-24 sm:max-h-32 min-h-[38px] leading-relaxed"
                 style={{ fontSize: '16px' }}
               />
 
               <button
                 onClick={() => handleSendMessage()}
                 disabled={!inputMessage.trim() || isSending}
-                className={`p-2.5 rounded-lg sm:rounded-xl font-bold transition flex items-center justify-center cursor-pointer shrink-0 ${
+                className={`p-2.5 rounded-lg sm:rounded-xl font-bold transition flex items-center justify-center cursor-pointer shrink-0 min-w-[40px] min-h-[40px] active:scale-95 ${
                   inputMessage.trim() && !isSending
                     ? 'bg-teal-600 hover:bg-teal-700 active:bg-teal-800 text-white shadow-md'
                     : 'bg-slate-200 text-slate-400 cursor-not-allowed'
                 }`}
+                aria-label="Send message"
               >
                 <Send className="w-4 h-4" />
               </button>
             </div>
 
-            <div className="flex items-center justify-between text-[11px] text-slate-400 px-1">
-              <span className="truncate max-w-[65%] sm:max-w-none">{t.disclaimerText}</span>
+            <div className="flex items-center justify-between text-[10px] sm:text-[11px] text-slate-400 px-1">
+              <span className="truncate max-w-[75%] sm:max-w-none">{t.disclaimerText}</span>
               <span className="hidden sm:inline-block shrink-0">Enter = পাঠাতে / Shift+Enter = নতুন লাইন</span>
             </div>
           </div>
