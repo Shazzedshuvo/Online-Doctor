@@ -9,6 +9,7 @@ export const translations = {
     reportNotice: 'স্বাস্থ্য আলোচনার সারাংশ — চিকিৎসকের প্রেসক্রিপশন নয়।',
     nav: {
       chat: 'স্বাস্থ্য সহকারী',
+      doctors: 'সেরা ডাক্তার',
       medicines: 'ঔষধ নির্দেশিকা',
       memory: 'স্মৃতি ব্যবস্থাপনা',
       reports: 'পরামর্শ রিপোর্ট',
@@ -187,6 +188,7 @@ export const translations = {
     reportNotice: 'Health Discussion Summary — Not a Doctor’s Prescription.',
     nav: {
       chat: 'Health Assistant',
+      doctors: 'Top Doctors',
       medicines: 'Medicine Directory',
       memory: 'Health Memory',
       reports: 'Consultation Reports',

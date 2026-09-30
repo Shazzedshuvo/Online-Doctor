@@ -2,14 +2,12 @@
 
 import React from 'react';
 import { usePathname } from 'next/navigation';
-import { PhoneCall, ShieldAlert, HeartHandshake } from 'lucide-react';
+import Link from 'next/link';
+import { PhoneCall, ShieldAlert, HeartHandshake, Stethoscope } from 'lucide-react';
 
 export default function Footer() {
   const pathname = usePathname();
 
-  // On the chat page ('/'), we omit the footer so the consultation window
-  // gets 100% of the mobile screen height without double scrollbars.
-  // Safety notices and emergency numbers are already integrated in the chat interface.
   if (pathname === '/') {
     return null;
   }
@@ -17,6 +15,29 @@ export default function Footer() {
   return (
     <footer className="bg-white border-t border-slate-200/90 py-6 sm:py-8 px-3 sm:px-6 no-print text-center text-xs text-slate-700">
       <div className="max-w-6xl mx-auto space-y-4">
+        {/* Navigation Quick Links */}
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs font-semibold text-slate-600">
+          <Link href="/" className="hover:text-teal-700 transition">
+            স্বাস্থ্য সহকারী
+          </Link>
+          <span className="text-slate-300">•</span>
+          <Link href="/doctors" className="text-teal-700 font-bold hover:underline flex items-center gap-1">
+            <Stethoscope className="w-3.5 h-3.5" />
+            <span>সেরা ডাক্তার</span>
+          </Link>
+          <span className="text-slate-300">•</span>
+          <Link href="/medicines" className="hover:text-teal-700 transition">
+            ঔষধ নির্দেশিকা
+          </Link>
+          <span className="text-slate-300">•</span>
+          <Link href="/reports" className="hover:text-teal-700 transition">
+            পরামর্শ রিপোর্ট
+          </Link>
+          <span className="text-slate-300">•</span>
+          <Link href="/privacy" className="hover:text-teal-700 transition">
+            গোপনীয়তা ও ডেটা সুরক্ষা
+          </Link>
+        </div>
         {/* Emergency Hotline Badges */}
         <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs font-semibold text-slate-800">
           <a

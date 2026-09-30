@@ -7,6 +7,7 @@ import { useApp } from '@/context/AppContext';
 import {
   Activity,
   MessageSquare,
+  Stethoscope,
   Pill,
   Brain,
   FileText,
@@ -31,6 +32,7 @@ export default function Navbar() {
 
   const navLinks = [
     { href: '/', label: t.nav.chat, icon: MessageSquare },
+    { href: '/doctors', label: t.nav.doctors, icon: Stethoscope },
     { href: '/medicines', label: t.nav.medicines, icon: Pill },
     { href: '/memory', label: t.nav.memory, icon: Brain },
     { href: '/reports', label: t.nav.reports, icon: FileText },
